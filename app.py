@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
-# Define and initialized the base model
+# Define and initialize the base model
 class Base(DeclarativeBase):
     pass
 
