@@ -1,0 +1,36 @@
+{% from 'generate_task_list.html' import generate_task_list  %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Task List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+</head>
+<body>
+    <div class="container mt-3">
+        <h2>Task List</h2>
+        <p>All created tasks are stored in an SQLite database with <a href="https://sqlitecloud.io/">sqlitecloud.io</a></p>
+        <form>
+            <div class="mb-3 mt-3">
+                <textarea class="form-control" rows="5" id="task" name="task" required></textarea>
+            </div>
+            <button type="submit"
+                    class="btn btn-primary"
+                    hx-post="{{ url_for('create') }}"
+                    hx-trigger="click"
+                    hx-target="#task_list"
+                    hx-swap="innerHTML"
+                    hx-validate="true">Create New Task</button>
+        </form>
+        <hr>
+        <div id="task_list">
+            {{ generate_task_list(tasks) }}
+        </div>
+    </div>
+</body>
+</html>

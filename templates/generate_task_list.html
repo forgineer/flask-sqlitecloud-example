@@ -1,0 +1,19 @@
+{% macro generate_task_list(task_list) -%}
+    {% for task in task_list %}
+    <div class="row p-1">
+        <div class="col-10 border rounded bg-warning">
+            {{ task['task'] }}
+        </div>
+        <div class="col-2 d-grid">
+            <button type="button"
+                    class="btn btn-danger"
+                    hx-post="{{ url_for('delete', task_id=task['id']) }}"
+                    hx-trigger="click"
+                    hx-target="#task_list"
+                    hx-swap="innerHTML">Delete</button>
+        </div>
+    </div>
+    {% endfor %}
+{%- endmacro %}
+
+{{ generate_task_list(tasks) }}
